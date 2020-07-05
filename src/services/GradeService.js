@@ -23,6 +23,9 @@ const remove = (id) => {
 const removeAll = () => {
   return http.delete(`/grade`);
 };
+const importGrades = () => {
+  return http.post(`/grade/import`);
+};
 
 const findByName = (name) => {
   return http.get(`/grade?name=${name}`);
@@ -36,4 +39,5 @@ export default {
   remove,
   removeAll,
   findByName,
+  importGrades
 };

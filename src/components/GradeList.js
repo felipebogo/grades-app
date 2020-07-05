@@ -49,6 +49,16 @@ const GradeList = () => {
         console.log(e);
       });
   };
+  const handleResetDataBase = () => {
+    GradeDataService.importGrades()
+      .then((response) => {
+        console.log(response.data);
+        refreshList();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const findByName = () => {
     GradeDataService.findByName(searchName)
@@ -104,6 +114,9 @@ const GradeList = () => {
         <button className="m-3 btn btn-sm btn-danger" onClick={removeAllGrade}>
           Remove All
         </button>
+        <button onClick={handleResetDataBase} className="btn btn-success">
+            Reset DataBase
+          </button>
       </div>
       <div className="col-md-6">
         {currentGrade ? (
