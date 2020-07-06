@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GradeDataService from '../services/GradeService';
 import { Link } from 'react-router-dom';
+import GradeView from './GradeView';
 
 const GradeList = () => {
   const [grade, setGrade] = useState([]);
@@ -37,6 +38,16 @@ const GradeList = () => {
   const setActiveGrade = (grade, index) => {
     setCurrentGrade(grade);
     setCurrentIndex(index);
+  };
+
+  const handleDeleteGrade = (id) => {
+    GradeDataService.remove(id)
+      .then((response) => {
+        refreshList();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const removeAllGrade = () => {
@@ -93,21 +104,19 @@ const GradeList = () => {
           </div>
         </div>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-12">
         <h4>Grade List</h4>
 
         <ul className="list-group">
           {grade &&
             grade.map((grade, index) => (
-              <li
-                className={
-                  'list-group-item ' + (index === currentIndex ? 'active' : '')
-                }
+              <GradeView
+                grade={grade}
                 onClick={() => setActiveGrade(grade, index)}
+                onDelete={handleDeleteGrade}
                 key={index}
-              >
-                {grade.name}
-              </li>
+                isCurrent={index === currentIndex}
+              />
             ))}
         </ul>
 
@@ -115,51 +124,8 @@ const GradeList = () => {
           Remove All
         </button>
         <button onClick={handleResetDataBase} className="btn btn-success">
-            Reset DataBase
+          Reset DataBase
           </button>
-      </div>
-      <div className="col-md-6">
-        {currentGrade ? (
-          <div>
-            <h4>Grade</h4>
-            <div>
-              <label>
-                <strong>Name:</strong>
-              </label>{' '}
-              {currentGrade.name}
-            </div>
-            <div>
-              <label>
-                <strong>Subject:</strong>
-              </label>{' '}
-              {currentGrade.subject}
-            </div>
-            <div>
-              <label>
-                <strong>Type:</strong>
-              </label>{' '}
-              {currentGrade.type}
-            </div>
-            <div>
-              <label>
-                <strong>Value:</strong>
-              </label>{' '}
-              {currentGrade.value}
-            </div>
-
-            <Link
-              to={'/grade/' + currentGrade.id}
-              className="badge badge-warning"
-            >
-              Edit
-            </Link>
-          </div>
-        ) : (
-          <div>
-            <br />
-            <p>Please click on a Grade...</p>
-          </div>
-        )}
       </div>
     </div>
   );

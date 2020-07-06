@@ -1,6 +1,7 @@
 .list {
   text-align: left;
   max-width: 750px;
+  min-width: 350px;
   margin: auto;
 }
 
