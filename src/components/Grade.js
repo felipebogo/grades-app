@@ -104,13 +104,13 @@ const Grade = (props) => {
             </div>
           </form>
 
-          <button className="badge badge-danger mr-2" onClick={deleteGrade}>
+          <button className="btn btn-danger mr-2" onClick={deleteGrade}>
             Delete
           </button>
 
           <button
             type="submit"
-            className="badge badge-success"
+            className="btn btn-success"
             onClick={updateGrade}
           >
             Update

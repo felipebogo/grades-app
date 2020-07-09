@@ -37,13 +37,13 @@ export default function GradeView({ grade, isCurrent, onClick, onDelete }) {
       {isCurrent ? <div className="flexCol">
         <Link
           to={`/grade/${id}`}
-          className="badge badge-warning"
+          className="btn btn-warning"
         >Edit
         </Link> 
         <button
           style={{border:"none", marginLeft:"5px"}}
           to={`/grade/${id}`}
-          className="badge badge-danger"
+          className="btn btn-danger"
           onClick={handleDelete}
         >Delete
         </button> 
